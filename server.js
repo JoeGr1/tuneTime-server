@@ -12,6 +12,8 @@ const cors = require("cors");
 
 app.use(cors());
 
+let session = {};
+
 // app.use(express.json);
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -32,23 +34,14 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-app.get("/auth/callback", (req, res) => {
-  // console.log(req);
-
+app.get("/auth/spotify/callback", (req, res) => {
   const code = req.query.code || null;
-  // console.log(code)
 
   const authBody = {
-    // grant_type: "client_credentials",
     grant_type: "authorization_code",
     redirect_uri: REDIRECT_URI,
     code: code,
   };
-
-  // console.log("here");
-  // console.log(authBody.code);
-
-  // console.log(typeof CLIENT_SECRET);
 
   const authHeaders = {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -56,8 +49,6 @@ app.get("/auth/callback", (req, res) => {
       "Basic " +
       Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
   };
-
-  console.log(authHeaders);
 
   const getToken = async () => {
     try {
@@ -67,10 +58,13 @@ app.get("/auth/callback", (req, res) => {
         { headers: authHeaders }
       );
 
-      // console.log(response);
+      session = response;
+      // console.log(session);
+      console.log(process.env.CLIENT_FEED_URL);
 
       if (response.status === 200) {
         res.send(JSON.stringify(response.data, null, 2));
+        // .redirect(process.env.CLIENT_FEED_URL);
       } else {
         res.send(response);
       }
@@ -80,6 +74,7 @@ app.get("/auth/callback", (req, res) => {
   };
 
   getToken();
+  res.redirect(`${process.env.CLIENT_FEED_URL}`);
 });
 
 // app.get("/refresh_token", (req, res) => {
