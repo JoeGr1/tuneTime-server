@@ -4,17 +4,17 @@ const router = express.Router();
 
 // get most recent post by following id (feed)
 
-// front end axios call
+// // front end axios call
 
-const getFollowingsPosts = async () => {
-  try {
-    const response = await axios.get("hhtp://localhost:9090/feed", {
-      params: { user_id: serverSession.sessionProfile.id },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// const getFollowingsPosts = async () => {
+//   try {
+//     const response = await axios.get("hhtp://localhost:9090/feed", {
+//       params: { user_id: serverSession.sessionProfile.id },
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 
 router.get("/feed", async (req, res) => {
   const user_id = req.query.user_id;
