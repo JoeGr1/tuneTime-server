@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+// const session = require("express-session");
 const querystring = require("querystring");
 const app = express();
 const PORT = process.env.PORT || 9090;
@@ -13,7 +14,15 @@ const { get } = require("http");
 app.use(cors());
 
 let session = null;
-let profile;
+// let profile;
+
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
 
 // app.use(express.json);
 
@@ -59,33 +68,11 @@ app.get("/auth/spotify/callback", (req, res) => {
         { headers: authHeaders }
       );
 
-      session = response;
+      session = response.data;
+      // console.log(session);
 
       if (response.status === 200) {
         res.redirect(`${process.env.CLIENT_FEED_URL}`);
-      } else {
-        res.send(response);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getProfile = async () => {
-    const profileheader = {
-      Authorization: `Bearer ${session.data.access_token}`,
-    };
-
-    try {
-      const response = await axios.post(
-        "https://api.spotify.com/v1/me",
-        querystring.stringify(authBody),
-        { headers: authHeaders }
-      );
-
-      if (response.status === 200) {
-        res.redirect(`${process.env.CLIENT_FEED_URL}`);
-        console.log(response);
       } else {
         res.send(response);
       }
@@ -95,13 +82,36 @@ app.get("/auth/spotify/callback", (req, res) => {
   };
 
   getToken();
-  console.log(session);
-  // getProfile();
 });
 
 app.get("/get-tokens", (req, res) => {
   try {
-    res.status(200).json(session.data);
+    const getProfile = async () => {
+      console.log(session.access_token);
+
+      const profileHeader = {
+        Authorization: `Bearer ${session.access_token}`,
+      };
+
+      try {
+        const response = await axios.get("https://api.spotify.com/v1/me", {
+          headers: profileHeader,
+        });
+
+        if (response.status === 200) {
+          res.status(200).json(session);
+        } else {
+          console.log(response);
+        }
+
+        const sessionProfile = response.data;
+
+        session = { ...session, sessionProfile };
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getProfile();
   } catch (error) {
     res.status(500).json({
       error: true,
@@ -110,13 +120,9 @@ app.get("/get-tokens", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Express App is listening to PORT: ${PORT}`);
-});
-
 app.get("/currently-playing", (req, res) => {
   let access_token = session.data.access_token;
-  console.log(access_token);
+  // console.log(access_token);
   const currentlyPlayingHeader = {
     Authorization: `Bearer ${access_token}`,
   };
@@ -126,17 +132,20 @@ app.get("/currently-playing", (req, res) => {
         "https://api.spotify.com/v1/me/player/currently-playing",
         { headers: currentlyPlayingHeader }
       );
-      console.log("here we are");
-      console.log(response.status);
       console.log(response.data);
     } catch (err) {
-      console.log("error here");
       console.log(err);
     }
   };
 
   getCurrent();
 });
+
+app.listen(PORT, () => {
+  console.log(`Express App is listening to PORT: ${PORT}`);
+});
+
+// -----------refresh token for longer use
 
 // // app.get("/refresh_token", (req, res) => {
 // //   const { refresh_token } = req.query;
