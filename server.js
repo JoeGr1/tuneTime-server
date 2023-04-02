@@ -87,7 +87,7 @@ app.get("/auth/spotify/callback", (req, res) => {
 app.get("/get-tokens", (req, res) => {
   try {
     const getProfile = async () => {
-      console.log(session.access_token);
+      // console.log(session.access_token);
 
       const profileHeader = {
         Authorization: `Bearer ${session.access_token}`,
