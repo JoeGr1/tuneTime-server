@@ -122,7 +122,7 @@ app.get("/get-tokens", (req, res) => {
 
 app.get("/currently-playing", (req, res) => {
   let access_token = session.data.access_token;
-  // console.log(access_token);
+  console.log(access_token);
   const currentlyPlayingHeader = {
     Authorization: `Bearer ${access_token}`,
   };
