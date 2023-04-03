@@ -141,6 +141,9 @@ app.get("/currently-playing", (req, res) => {
   getCurrent();
 });
 
+const usersRoutes = require("./routes/users");
+app.use("/api/users", usersRoutes);
+
 app.listen(PORT, () => {
   console.log(`Express App is listening to PORT: ${PORT}`);
 });

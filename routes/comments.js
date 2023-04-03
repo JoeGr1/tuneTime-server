@@ -5,3 +5,5 @@ const router = express.Router();
 // get comments by post id ( with user names )
 
 // post comments by post id
+
+module.exports = router;

@@ -37,3 +37,5 @@ router.get("/feed", async (req, res) => {
 //get single post by id
 
 // post Posts user id
+
+module.exports = router;
