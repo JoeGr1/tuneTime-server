@@ -45,14 +45,17 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/auth/spotify/callback", (req, res) => {
+  // Get the code from the URL
   const code = req.query.code || null;
 
+  // Setup the body of the POST request to /api/token
   const authBody = {
     grant_type: "authorization_code",
     redirect_uri: REDIRECT_URI,
     code: code,
   };
 
+  // Setup the headers of the POST request to /api/token
   const authHeaders = {
     "Content-Type": "application/x-www-form-urlencoded",
     Authorization:
@@ -60,6 +63,7 @@ app.get("/auth/spotify/callback", (req, res) => {
       Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString("base64"),
   };
 
+  // Execute the POST requset to /api/token
   const getToken = async () => {
     try {
       const response = await axios.post(
@@ -68,27 +72,10 @@ app.get("/auth/spotify/callback", (req, res) => {
         { headers: authHeaders }
       );
 
+      // Set the session, based on the response from /api/token
       session = response.data;
-      // console.log(session);
 
-      if (response.status === 200) {
-        res.redirect(`${process.env.CLIENT_FEED_URL}`);
-      } else {
-        res.send(response);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  getToken();
-});
-
-app.get("/get-tokens", (req, res) => {
-  try {
-    const getProfile = async () => {
-      // console.log(session.access_token);
-
+      // Setup the header for the GET request to /v1/me
       const profileHeader = {
         Authorization: `Bearer ${session.access_token}`,
       };
@@ -98,26 +85,27 @@ app.get("/get-tokens", (req, res) => {
           headers: profileHeader,
         });
 
-        if (response.status === 200) {
-          res.status(200).json(session);
-        } else {
-          console.log(response);
-        }
-
+        // Create a new variable to store the profile
         const sessionProfile = response.data;
 
+        // Set the session to equal what it was before (i.e. the result of POST /api/token)
+        // as well as the profile
         session = { ...session, sessionProfile };
       } catch (error) {
         console.log(error);
       }
-    };
-    getProfile();
-  } catch (error) {
-    res.status(500).json({
-      error: true,
-      message: `Could not fetch tokens from session`,
-    });
-  }
+
+      res.redirect(`${process.env.CLIENT_FEED_URL}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getToken();
+});
+
+app.get("/get-session", (req, res) => {
+  res.status(200).json(session);
 });
 
 app.get("/currently-playing", (req, res) => {
