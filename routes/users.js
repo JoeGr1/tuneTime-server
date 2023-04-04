@@ -2,15 +2,54 @@ const knex = require("knex")(require("../knexfile"));
 const express = require("express");
 const router = express.Router();
 
+// router.use(express.json());
+
+// POST check user exists/ create user
+
+router.post("/create-user", async (req, res) => {
+  const { spotify_id, user_name } = req.body;
+
+  const exists = await knex("users").where({ spotify_id: req.body.spotify_id });
+
+  if (exists.length) {
+    const user = { spotify_id: spotify_id, user_name: user_name };
+    return res.status(200).json(user);
+  }
+
+  if (!spotify_id || !user_name) {
+    return res.status(400).json("User must have an Id and Username");
+  }
+
+  try {
+    const user = { spotify_id: spotify_id, user_name: user_name };
+    await knex("users").insert(user);
+    res.status(201).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Server Error: Could not add User to Database");
+  }
+});
+
 // get single user by id
 
+router.get("/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const getUserProfile = await knex("users").where({ spotify_id: userId });
+
+    if (!userId.length) {
+      res.status(404).json(`Could not find user with Spotify_id: ${userId}`);
+    }
+
+    res.status(200).json(getUserProfile);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(`Could not fetch User from Database`);
+  }
+});
+
 //get users by name for search
-
-// front end search axios request
-
-// const searchUsers = async () => {
-//   re;
-// };
 
 router.get("/search/:searchTerm", async (req, res) => {
   const searchTerm = req.params.searchTerm;
@@ -19,15 +58,47 @@ router.get("/search/:searchTerm", async (req, res) => {
       .select("*")
       .from("users")
       .where("user_name", "like", `%${searchTerm}%`);
-    res.json(usersBySearch);
+
+    if (!usersBySearch.length) {
+      res.status(404).json("No mathcing Users");
+    }
+
+    res.status(200).json(usersBySearch);
   } catch (err) {
     console.log(err);
     res.status(500).send(`Error Searching for user: ${searchTerm} `);
   }
 });
 
-//get users by following_id
+//get users by following by user id
+
+router.get("/following/:id", async (req, res) => {
+  const currentUserId = req.params.id;
+
+  try {
+    const getUsersFollowing = await knex
+      .select("*")
+      .from("following")
+      .where("spotify_id", "=", currentUserId);
+    res.status(200).json(getUsersFollowing);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error Could not find Following List`);
+  }
+});
 
 //delete user by id
+
+router.delete("/:id", async (req, res) => {
+  const currentUserId = req.params.id;
+
+  try {
+    await knex("users").where({ spotify_id: currentUserId }).del();
+    res.status(200).json(currentUserId).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error Could not find Following List`);
+  }
+});
 
 module.exports = router;

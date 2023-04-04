@@ -5,13 +5,14 @@
 exports.up = function (knex) {
   return knex.schema
     .createTable("users", (table) => {
-      table.string("id").primary();
+      table.increments("id").primary();
+      table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
     })
     .createTable("posts", (table) => {
       table.string("id").primary();
-      table.string("user_id").notNullable();
+      table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.text("song_name").notNullable();
       table.text("artist_name").notNullable();
@@ -20,8 +21,8 @@ exports.up = function (knex) {
       table.text("song_duration").notNullable();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
       table
-        .foreign("user_id")
-        .references("id")
+        .foreign("spotify_id")
+        .references("spotify_id")
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
@@ -33,18 +34,18 @@ exports.up = function (knex) {
         .onDelete("CASCADE");
     })
     .createTable("following", (table) => {
-      table.string("user_id").notNullable().index();
+      table.string("spotify_id").notNullable().index();
       table.string("following_id").notNullable().index();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
       table
-        .foreign("user_id")
-        .references("id")
+        .foreign("spotify_id")
+        .references("spotify_id")
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
         .foreign("following_id")
-        .references("id")
+        .references("spotify_id")
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
@@ -52,7 +53,7 @@ exports.up = function (knex) {
     .createTable("comments", (table) => {
       table.increments("id").primary();
       table.string("post_id").notNullable().index();
-      table.string("user_id").notNullable().index();
+      table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.text("content").notNullable();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
@@ -63,8 +64,8 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table
-        .foreign("user_id")
-        .references("id")
+        .foreign("spotify_id")
+        .references("spotify_id")
         .inTable("users")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");

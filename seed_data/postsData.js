@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: "111",
-    user_id: "james123",
+    spotify_id: "james123",
     user_name: "James Bond",
     song_name: "Kyle (i found you)",
     artist_name: "Fred again..",
@@ -12,7 +12,7 @@ module.exports = [
   },
   {
     id: "112",
-    user_id: "james123",
+    spotify_id: "james123",
     user_name: "James Bond",
     song_name: "It's a Beautiful Day (Reprise)",
     artist_name: "The Kiffness",
@@ -23,7 +23,7 @@ module.exports = [
   },
   {
     id: "113",
-    user_id: "james123",
+    spotify_id: "james123",
     user_name: "James Bond",
     song_name: "Sunsleeper",
     artist_name: "Barry Can't Swim",
@@ -34,7 +34,7 @@ module.exports = [
   },
   {
     id: "114",
-    user_id: "yeye123",
+    spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Flashing Lights",
     artist_name: "Kanye West",
@@ -45,7 +45,7 @@ module.exports = [
   },
   {
     id: "115",
-    user_id: "yeye123",
+    spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Bound 2",
     artist_name: "Kanye West",
@@ -56,7 +56,7 @@ module.exports = [
   },
   {
     id: "116",
-    user_id: "yeye123",
+    spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Father Stretch My Hands Pt. 1",
     artist_name: "Kanye West",
@@ -68,7 +68,7 @@ module.exports = [
 
   {
     id: "117",
-    user_id: "potter99",
+    spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "One Day (Vandaag) - Radio Edit",
     artist_name: "Bakermat",
@@ -79,7 +79,7 @@ module.exports = [
   },
   {
     id: "118",
-    user_id: "potter99",
+    spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "El Layali",
     artist_name: "Barry Can't Swim",
@@ -90,7 +90,7 @@ module.exports = [
   },
   {
     id: "119",
-    user_id: "potter99",
+    spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "Jungle",
     artist_name: "Fred Again..",
@@ -101,7 +101,7 @@ module.exports = [
   },
   {
     id: "120",
-    user_id: "sandles123",
+    spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Reflection",
     artist_name: "Riordan",
@@ -112,7 +112,7 @@ module.exports = [
   },
   {
     id: "121",
-    user_id: "sandles123",
+    spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Marechià",
     artist_name: "Nu Genea",
@@ -123,7 +123,7 @@ module.exports = [
   },
   {
     id: "122",
-    user_id: "sandles123",
+    spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Day Dreaming",
     artist_name: "Aretha Franklin",
@@ -134,7 +134,7 @@ module.exports = [
   },
   {
     id: "123",
-    user_id: "LH44",
+    spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "Feel Good Inc.",
     artist_name: "Seramic",
@@ -145,7 +145,7 @@ module.exports = [
   },
   {
     id: "124",
-    user_id: "LH44",
+    spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "The Big Bang",
     artist_name: "Rock Mafia",
@@ -156,7 +156,7 @@ module.exports = [
   },
   {
     id: "125",
-    user_id: "LH44",
+    spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "Praise You - Radio Edit",
     artist_name: "Fatboy Slim",

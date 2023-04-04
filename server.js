@@ -13,6 +13,8 @@ const { get } = require("http");
 
 app.use(cors());
 
+app.use(express.json());
+
 let session = null;
 // let profile;
 
@@ -131,6 +133,12 @@ app.get("/currently-playing", (req, res) => {
 
 const usersRoutes = require("./routes/users");
 app.use("/api/users", usersRoutes);
+
+const postsRoutes = require("./routes/posts");
+app.use("/api/posts", postsRoutes);
+
+const folllowingRoutes = require("./routes/following");
+app.use("/api/following", folllowingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Express App is listening to PORT: ${PORT}`);
