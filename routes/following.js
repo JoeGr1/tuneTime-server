@@ -2,6 +2,40 @@ const knex = require("knex")(require("../knexfile"));
 const express = require("express");
 const router = express.Router();
 
+//get lst of following
+
+router.get("/:id", async (req, res) => {
+  const currentUserId = req.params.id;
+
+  try {
+    const getUsersFollowing = await knex
+      .select("*")
+      .from("following")
+      .where("spotify_id", "=", currentUserId);
+    res.status(200).json(getUsersFollowing);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error Could not find Following List`);
+  }
+});
+
+// get list of followers
+
+router.get("/followers/:id", async (req, res) => {
+  const currentUserId = req.params.id;
+
+  try {
+    const getUsersFollowing = await knex
+      .select("*")
+      .from("following")
+      .where("following_id", "=", currentUserId);
+    res.status(200).json(getUsersFollowing);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error Could not find Follower List`);
+  }
+});
+
 // post new following userid and following user id
 
 router.post("/", async (req, res) => {

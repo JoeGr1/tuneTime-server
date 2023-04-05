@@ -1,9 +1,9 @@
 module.exports = [
   {
-    id: "111",
     spotify_id: "james123",
     user_name: "James Bond",
     song_name: "Kyle (i found you)",
+    song_id: "6Ao5d7TMQ92h87jQqSHGyw",
     artist_name: "Fred again..",
     album_name: "album",
     album_cover:
@@ -11,10 +11,10 @@ module.exports = [
     song_duration: "3:59",
   },
   {
-    id: "112",
     spotify_id: "james123",
     user_name: "James Bond",
     song_name: "It's a Beautiful Day (Reprise)",
+    song_id: "2lujnKdLiRVjcueFs648AW",
     artist_name: "The Kiffness",
     album_name: "single",
     album_cover:
@@ -22,10 +22,10 @@ module.exports = [
     song_duration: "3:27",
   },
   {
-    id: "113",
     spotify_id: "james123",
     user_name: "James Bond",
     song_name: "Sunsleeper",
+    song_id: "7yWd93ZTbCuhaH2QCsTHKc",
     artist_name: "Barry Can't Swim",
     album_name: "single",
     album_cover:
@@ -33,10 +33,10 @@ module.exports = [
     song_duration: "3:43",
   },
   {
-    id: "114",
     spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Flashing Lights",
+    song_id: "5TRPicyLGbAF2LGBFbHGvO",
     artist_name: "Kanye West",
     album_name: "album",
     album_cover:
@@ -44,10 +44,10 @@ module.exports = [
     song_duration: "3:22",
   },
   {
-    id: "115",
     spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Bound 2",
+    song_id: "3sNVsP50132BTNlImLx70i",
     artist_name: "Kanye West",
     album_name: "album",
     album_cover:
@@ -55,10 +55,10 @@ module.exports = [
     song_duration: "3:17",
   },
   {
-    id: "116",
     spotify_id: "yeye123",
     user_name: "Kanye West",
     song_name: "Father Stretch My Hands Pt. 1",
+    song_id: "4KW1lqgSr8TKrvBII0Brf8",
     artist_name: "Kanye West",
     album_name: "album",
     album_cover:
@@ -67,10 +67,10 @@ module.exports = [
   },
 
   {
-    id: "117",
     spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "One Day (Vandaag) - Radio Edit",
+    song_id: "0GSU6yLOJqO10ziQuBLWOE",
     artist_name: "Bakermat",
     album_name: "single",
     album_cover:
@@ -78,10 +78,10 @@ module.exports = [
     song_duration: "3:22",
   },
   {
-    id: "118",
     spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "El Layali",
+    song_id: "51qw9DAEYn0RS23LtwZU84",
     artist_name: "Barry Can't Swim",
     album_name: "single",
     album_cover:
@@ -89,10 +89,10 @@ module.exports = [
     song_duration: "3:17",
   },
   {
-    id: "119",
     spotify_id: "potter99",
     user_name: "Harry Potter",
     song_name: "Jungle",
+    song_id: "3fSDSeR4mOGCldB3nhq7M1",
     artist_name: "Fred Again..",
     album_name: "single",
     album_cover:
@@ -100,10 +100,10 @@ module.exports = [
     song_duration: "3:37",
   },
   {
-    id: "120",
     spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Reflection",
+    song_id: "5T10GMsxlnyizGo6RL5fvI",
     artist_name: "Riordan",
     album_name: "single",
     album_cover:
@@ -111,10 +111,10 @@ module.exports = [
     song_duration: "3:35",
   },
   {
-    id: "121",
     spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Marechià",
+    song_id: "1gE7p3b4J8p4ivOCR2CO0Y",
     artist_name: "Nu Genea",
     album_name: "single",
     album_cover:
@@ -122,10 +122,10 @@ module.exports = [
     song_duration: "3:37",
   },
   {
-    id: "122",
     spotify_id: "sandles123",
     user_name: "Adam Sandler",
     song_name: "Day Dreaming",
+    song_id: "7L4G39PVgMfaeHRyi1ML7y",
     artist_name: "Aretha Franklin",
     album_name: "single",
     album_cover:
@@ -133,10 +133,10 @@ module.exports = [
     song_duration: "3:37",
   },
   {
-    id: "123",
     spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "Feel Good Inc.",
+    song_id: "1sSrcr4HctMNRGaSCRu8uE",
     artist_name: "Seramic",
     album_name: "single",
     album_cover:
@@ -144,10 +144,10 @@ module.exports = [
     song_duration: "3:45",
   },
   {
-    id: "124",
     spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "The Big Bang",
+    song_id: "3zbrrPKjo7GprwgGyXzEsO",
     artist_name: "Rock Mafia",
     album_name: "single",
     album_cover:
@@ -155,10 +155,32 @@ module.exports = [
     song_duration: "3:17",
   },
   {
-    id: "125",
     spotify_id: "LH44",
     user_name: "Lewis Hamilton",
     song_name: "Praise You - Radio Edit",
+    song_id: "2tn9zXqIZJbgL1swqwOktz",
+    artist_name: "Fatboy Slim",
+    album_name: "compilation",
+    album_cover:
+      "https://i.scdn.co/image/ab67616d00001e025881f12ca6d02eb7987dd09b",
+    song_duration: "3:53",
+  },
+  {
+    spotify_id: "c18-jdg",
+    user_name: "Joe Gregson",
+    song_name: "Praise You - Radio Edit",
+    song_id: "2tn9zXqIZJbgL1swqwOktz",
+    artist_name: "Fatboy Slim",
+    album_name: "compilation",
+    album_cover:
+      "https://i.scdn.co/image/ab67616d00001e025881f12ca6d02eb7987dd09b",
+    song_duration: "3:53",
+  },
+  {
+    spotify_id: "c18-jdg",
+    user_name: "Joe Gregson",
+    song_name: "Praise You - Radio Edit",
+    song_id: "2tn9zXqIZJbgL1swqwOktz",
     artist_name: "Fatboy Slim",
     album_name: "compilation",
     album_cover:

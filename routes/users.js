@@ -70,23 +70,6 @@ router.get("/search/:searchTerm", async (req, res) => {
   }
 });
 
-//get users by following by user id
-
-router.get("/following/:id", async (req, res) => {
-  const currentUserId = req.params.id;
-
-  try {
-    const getUsersFollowing = await knex
-      .select("*")
-      .from("following")
-      .where("spotify_id", "=", currentUserId);
-    res.status(200).json(getUsersFollowing);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(`Error Could not find Following List`);
-  }
-});
-
 //delete user by id
 
 router.delete("/:id", async (req, res) => {

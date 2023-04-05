@@ -11,10 +11,11 @@ exports.up = function (knex) {
       table.timestamp("updated_at").defaultTo(knex.fn.now());
     })
     .createTable("posts", (table) => {
-      table.string("id").primary();
+      table.increments("id").primary();
       table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.text("song_name").notNullable();
+      table.text("song_id").notNullable();
       table.text("artist_name").notNullable();
       table.text("album_name").notNullable();
       table.text("album_cover").notNullable();
@@ -52,7 +53,7 @@ exports.up = function (knex) {
     })
     .createTable("comments", (table) => {
       table.increments("id").primary();
-      table.string("post_id").notNullable().index();
+      table.integer("post_id").notNullable().unsigned().index();
       table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.text("content").notNullable();

@@ -75,10 +75,10 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const {
-    id,
     spotify_id,
     user_name,
     song_name,
+    song_id,
     artist_name,
     album_name,
     album_cover,
@@ -87,10 +87,10 @@ router.post("/", async (req, res) => {
 
   // Check body of POST request is ONLY what is expected
   if (
-    !id ||
     !spotify_id ||
     !user_name ||
     !song_name ||
+    !song_id ||
     !artist_name ||
     !album_name ||
     !album_cover ||
@@ -101,10 +101,10 @@ router.post("/", async (req, res) => {
       error: "true",
       message: "Incomplete POST body",
       requiredProperties: [
-        "id",
         "spotify_id",
         "user_name",
         "song_name",
+        "song_id",
         "artist_name",
         "album_name",
         "album_cover",
@@ -115,7 +115,8 @@ router.post("/", async (req, res) => {
 
   try {
     const newPost = req.body;
-    knex("posts").insert(newPost);
+    console.log(newPost);
+    await knex("posts").insert(newPost);
     res.status(201).json(newPost);
   } catch (err) {
     console.log(err);
