@@ -61,12 +61,17 @@ router.post("/", async (req, res) => {
 });
 
 // delete following user id and following user id
-router.delete("/:id", async (req, res) => {
-  const userId = req.params.id;
+router.delete("/:user_id/:following_id", async (req, res) => {
+  const userId = req.params.user_id;
+  const followingId = req.params.following_id;
+
+  const unfollow = { spotify_id: userId, following_id: followingId };
 
   try {
-    await knex("following").where({ spotify_id: userId }).del();
-    res.status(200).json(userId).end();
+    await knex("following")
+      .where({ spotify_id: userId, following_id: followingId })
+      .del();
+    res.status(200).json(unfollow).end();
   } catch (err) {
     console.log(err);
     res.status(500).send(`Error Could not find Following List`);
