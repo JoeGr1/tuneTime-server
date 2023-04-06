@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
     const newFollow = req.body;
     await knex("following").insert(newFollow);
     res.status(201).json(newFollow);
-  } catch {
+  } catch (err) {
     console.log(err);
     res
       .status(500)
