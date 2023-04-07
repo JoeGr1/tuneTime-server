@@ -61,12 +61,59 @@ router.get("/search/:searchTerm", async (req, res) => {
 
     if (!usersBySearch.length) {
       res.status(404).json("No mathcing Users");
+      return;
     }
 
     res.status(200).json(usersBySearch);
   } catch (err) {
     console.log(err);
     res.status(500).send(`Error Searching for user: ${searchTerm} `);
+  }
+});
+
+// get list of users that follow a profile (follower list)
+
+router.get("/followers/:spotify_id", async (req, res) => {
+  const spotify_id = req.params.spotify_id;
+  try {
+    const followers = await knex
+      .select("*")
+      .from("users")
+      .join("following", "users.spotify_id", "=", "following.spotify_id")
+      .where("following.following_id", spotify_id);
+
+    if (!followers.length) {
+      res.status(404).json("No followers found for the user");
+      return;
+    }
+
+    res.status(200).json(followers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error getting followers for user: ${spotify_id}`);
+  }
+});
+
+// get a list of users followed by a profile (following list)
+
+router.get("/following/:spotify_id", async (req, res) => {
+  const spotify_id = req.params.spotify_id;
+  try {
+    const followers = await knex
+      .select("*")
+      .from("users")
+      .join("following", "users.spotify_id", "=", "following.following_id")
+      .where("following.spotify_id", spotify_id);
+
+    if (!followers.length) {
+      res.status(404).json("No followers found for the user");
+      return;
+    }
+
+    res.status(200).json(followers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(`Error getting followers for user: ${spotify_id}`);
   }
 });
 
