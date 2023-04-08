@@ -139,16 +139,41 @@ router.post("/", async (req, res) => {
   }
 });
 
+// check if user has liked post
+
+router.get("/:post_id/liked/:user_id", async (req, res) => {
+  const postId = req.params.post_id;
+  const spotifyId = req.params.user_id;
+
+  try {
+    const result = await knex("likes")
+      .where({
+        post_id: postId,
+        spotify_id: spotifyId,
+      })
+      .select("id");
+
+    if (result.length > 0) {
+      res.status(200).json({ liked: true });
+    } else {
+      res.status(200).json({ liked: false });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(`Could not retrieve likes for post ${postId}`);
+  }
+});
+
 // like post
 router.post("/:id/like", async (req, res) => {
   const postId = req.params.id;
-  const { user_id } = req.body;
+  const { spotify_id } = req.body;
 
   try {
     // check if user has already liked the post
     const existingLike = await knex("likes")
       .where("post_id", "=", postId)
-      .andWhere("user_id", "=", user_id)
+      .andWhere("spotify_id", "=", spotify_id)
       .first();
 
     if (existingLike) {
@@ -162,7 +187,7 @@ router.post("/:id/like", async (req, res) => {
     await knex("posts").where("id", "=", postId).increment("likes", 1);
 
     // add like record to database
-    await knex("likes").insert({ post_id: postId, user_id });
+    await knex("likes").insert({ post_id: postId, spotify_id: spotify_id });
 
     res.status(200).json({
       success: true,
@@ -177,13 +202,13 @@ router.post("/:id/like", async (req, res) => {
 // unlike post
 router.post("/:id/unlike", async (req, res) => {
   const postId = req.params.id;
-  const { user_id } = req.body;
+  const { spotify_id } = req.body;
 
   try {
     // check if user has already liked the post
     const existingLike = await knex("likes")
       .where("post_id", "=", postId)
-      .andWhere("user_id", "=", user_id)
+      .andWhere("spotify_id", "=", spotify_id)
       .first();
 
     if (!existingLike) {
@@ -199,7 +224,7 @@ router.post("/:id/unlike", async (req, res) => {
     // remove like record from database
     await knex("likes")
       .where("post_id", "=", postId)
-      .andWhere("user_id", "=", user_id)
+      .andWhere("spotify_id", "=", spotify_id)
       .del();
 
     res.status(200).json({
