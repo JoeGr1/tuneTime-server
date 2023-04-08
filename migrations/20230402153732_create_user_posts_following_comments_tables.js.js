@@ -9,6 +9,7 @@ exports.up = function (knex) {
       table.string("spotify_id").notNullable().index();
       table.string("user_name").notNullable().index();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
+      table.timestamp("created_at").defaultTo(knex.fn.now());
     })
     .createTable("posts", (table) => {
       table.increments("id").primary();
@@ -20,7 +21,9 @@ exports.up = function (knex) {
       table.text("album_name").notNullable();
       table.text("album_cover").notNullable();
       table.text("song_duration").notNullable();
+      table.integer("likes").unsigned().notNullable();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
+      table.timestamp("created_at").defaultTo(knex.fn.now());
       table
         .foreign("spotify_id")
         .references("spotify_id")
@@ -38,6 +41,8 @@ exports.up = function (knex) {
       table.string("spotify_id").notNullable().index();
       table.string("following_id").notNullable().index();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
+      table.timestamp("created_at").defaultTo(knex.fn.now());
+
       table
         .foreign("spotify_id")
         .references("spotify_id")
@@ -58,6 +63,8 @@ exports.up = function (knex) {
       table.string("user_name").notNullable().index();
       table.text("content").notNullable();
       table.timestamp("updated_at").defaultTo(knex.fn.now());
+      table.timestamp("created_at").defaultTo(knex.fn.now());
+
       table
         .foreign("post_id")
         .references("id")

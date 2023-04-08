@@ -74,6 +74,8 @@ router.get("/:id", async (req, res) => {
 // post Posts
 
 router.post("/", async (req, res) => {
+  console.log(req.body);
+  console.log(typeof req.body.likes);
   const {
     spotify_id,
     user_name,
@@ -83,6 +85,7 @@ router.post("/", async (req, res) => {
     album_name,
     album_cover,
     song_duration,
+    likes,
   } = req.body;
 
   // Check body of POST request is ONLY what is expected
@@ -95,7 +98,8 @@ router.post("/", async (req, res) => {
     !album_name ||
     !album_cover ||
     !song_duration ||
-    Object.keys(req.body).length > 8
+    !likes ||
+    Object.keys(req.body).length > 9
   ) {
     return res.status(400).json({
       error: "true",
@@ -109,18 +113,60 @@ router.post("/", async (req, res) => {
         "album_name",
         "album_cover",
         "song_duration",
+        "likes",
       ],
     });
   }
 
   try {
-    const newPost = req.body;
+    const newPost = {
+      spotify_id,
+      user_name,
+      song_name,
+      song_id,
+      artist_name,
+      album_name,
+      album_cover,
+      song_duration,
+      likes: Number(likes),
+    };
     console.log(newPost);
     await knex("posts").insert(newPost);
     res.status(201).json(newPost);
   } catch (err) {
     console.log(err);
     res.status(500).json(`Could not Add post Righ Now`);
+  }
+});
+
+// like/unlike post
+
+router.put("/:id", async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const post = await knex("posts").where("id", "=", postId).first();
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const { liked } = req.body;
+
+    if (liked) {
+      post.likes += 1;
+    } else {
+      post.likes -= 1;
+    }
+
+    await knex("posts").where("id", "=", postId).update({
+      likes: post.likes,
+    });
+
+    res.status(200).json(post);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(`Could not Update Post Right Now`);
   }
 });
 

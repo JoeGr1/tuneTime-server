@@ -144,6 +144,50 @@ app.listen(PORT, () => {
   console.log(`Express App is listening to PORT: ${PORT}`);
 });
 
+// // ------------ potnetnial add widget to posts
+
+// cryyently getting server error (spotiy error, could be axios request error though)
+
+// // back end
+
+// app.get("/get-widget/:songid", async (req, res) => {
+//   const songId = req.params.songid;
+//   console.log(songId);
+//   try {
+//     const response = await axios.get(
+//       `https://open.spotify.com/episode/${songId}`
+//     );
+//     console.log(response.data);
+//     res.status(200).json(response.data);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json("Error Fetching Widget");
+//   }
+// });
+
+// // front end
+
+// const MyPost = ({ post }) => {
+//   console.log(post.song_id);
+//   const songId = post.song_id;
+
+//   const getEmbed = async () => {
+//     try {
+//       const { data } = await axios.get(
+//         `${process.env.REACT_APP_SERVER_URL}/get-widget/${songId}`
+//       );
+//       console.log(data);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getEmbed();
+//   }, []);
+
+//   // -------------------
+
 // -----------refresh token for longer use
 
 // // app.get("/refresh_token", (req, res) => {
