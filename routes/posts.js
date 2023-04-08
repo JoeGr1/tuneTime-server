@@ -139,34 +139,76 @@ router.post("/", async (req, res) => {
   }
 });
 
-// like/unlike post
-
-router.put("/:id", async (req, res) => {
+// like post
+router.post("/:id/like", async (req, res) => {
   const postId = req.params.id;
+  const { user_id } = req.body;
 
   try {
-    const post = await knex("posts").where("id", "=", postId).first();
+    // check if user has already liked the post
+    const existingLike = await knex("likes")
+      .where("post_id", "=", postId)
+      .andWhere("user_id", "=", user_id)
+      .first();
 
-    if (!post) {
-      return res.status(404).json({ error: "Post not found" });
+    if (existingLike) {
+      return res.status(400).json({
+        error: true,
+        message: "User has already liked this post",
+      });
     }
 
-    const { liked } = req.body;
+    // increment likes counter on the post
+    await knex("posts").where("id", "=", postId).increment("likes", 1);
 
-    if (liked) {
-      post.likes += 1;
-    } else {
-      post.likes -= 1;
-    }
+    // add like record to database
+    await knex("likes").insert({ post_id: postId, user_id });
 
-    await knex("posts").where("id", "=", postId).update({
-      likes: post.likes,
+    res.status(200).json({
+      success: true,
+      message: "Post liked successfully",
     });
-
-    res.status(200).json(post);
   } catch (err) {
     console.log(err);
-    res.status(500).json(`Could not Update Post Right Now`);
+    res.status(500).json(`Could not like post at this time`);
+  }
+});
+
+// unlike post
+router.post("/:id/unlike", async (req, res) => {
+  const postId = req.params.id;
+  const { user_id } = req.body;
+
+  try {
+    // check if user has already liked the post
+    const existingLike = await knex("likes")
+      .where("post_id", "=", postId)
+      .andWhere("user_id", "=", user_id)
+      .first();
+
+    if (!existingLike) {
+      return res.status(400).json({
+        error: true,
+        message: "User has not liked this post yet",
+      });
+    }
+
+    // decrement likes counter on the post
+    await knex("posts").where("id", "=", postId).decrement("likes", 1);
+
+    // remove like record from database
+    await knex("likes")
+      .where("post_id", "=", postId)
+      .andWhere("user_id", "=", user_id)
+      .del();
+
+    res.status(200).json({
+      success: true,
+      message: "Post unliked successfully",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(`Could not unlike post at this time`);
   }
 });
 

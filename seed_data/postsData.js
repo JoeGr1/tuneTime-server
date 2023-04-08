@@ -9,7 +9,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e020f0e63e38a0ea92314ab9d7f",
     song_duration: "3:59",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "james123",
@@ -21,7 +21,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02b60359c506c31692c1274616",
     song_duration: "3:27",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "james123",
@@ -33,7 +33,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02bea3645a278502ec5a865251",
     song_duration: "3:43",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "yeye123",
@@ -45,7 +45,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e0226f7f19c7f0381e56156c94a",
     song_duration: "3:22",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "yeye123",
@@ -57,7 +57,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e021dacfbc31cc873d132958af9",
     song_duration: "3:17",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "yeye123",
@@ -69,7 +69,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e022a7db835b912dc5014bd37f4",
     song_duration: "3:37",
-    likes: 3,
+    likes: 2,
   },
 
   {
@@ -82,7 +82,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02c136203bd19a1412c4d84278",
     song_duration: "3:22",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "potter99",
@@ -94,7 +94,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e022d9b7435c0eb14707ba407b0",
     song_duration: "3:17",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "potter99",
@@ -106,7 +106,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02f53460be9a3f788777b0fe5c",
     song_duration: "3:37",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "sandles123",
@@ -118,7 +118,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e028adcf47d09c88e877670941c",
     song_duration: "3:35",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "sandles123",
@@ -130,7 +130,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02a04f320152fcbd5dad2e8905",
     song_duration: "3:37",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "sandles123",
@@ -142,7 +142,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02ee5fcff519d1098aa5de990d",
     song_duration: "3:37",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "LH44",
@@ -154,7 +154,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02a7b2a5a5b26fb7f9ca945182",
     song_duration: "3:45",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "LH44",
@@ -166,7 +166,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02f14e9f86f0b3a5e2db2f28fb",
     song_duration: "3:17",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "LH44",
@@ -178,7 +178,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e025881f12ca6d02eb7987dd09b",
     song_duration: "3:53",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "c18-jdg",
@@ -190,7 +190,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02ad1266649a1ee788e402eb7a",
     song_duration: "2:08",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "c18-jdg",
@@ -202,7 +202,7 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e02b414302840b38532ed1e0917",
     song_duration: "3:57",
-    likes: 3,
+    likes: 2,
   },
   {
     spotify_id: "c18-jdg",
@@ -214,6 +214,6 @@ module.exports = [
     album_cover:
       "https://i.scdn.co/image/ab67616d00001e021af2f97377f0383b6a74992a",
     song_duration: "2:59",
-    likes: 3,
+    likes: 2,
   },
 ];

@@ -56,6 +56,24 @@ exports.up = function (knex) {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
     })
+    .createTable("likes", (table) => {
+      table.increments("id").primary();
+      table.integer("post_id").unsigned().notNullable();
+      table.string("spotify_id").notNullable().index();
+      table.timestamp("created_at").defaultTo(knex.fn.now());
+
+      table
+        .foreign("post_id")
+        .references("id")
+        .inTable("posts")
+        .onDelete("CASCADE");
+
+      table
+        .foreign("spotify_id")
+        .references("spotify_id")
+        .inTable("users")
+        .onDelete("CASCADE");
+    })
     .createTable("comments", (table) => {
       table.increments("id").primary();
       table.integer("post_id").notNullable().unsigned().index();
@@ -89,6 +107,7 @@ exports.up = function (knex) {
 exports.down = function (knex) {
   return knex.schema
     .dropTable("comments")
+    .dropTable("likes")
     .dropTable("following")
     .dropTable("posts")
     .dropTable("users");
