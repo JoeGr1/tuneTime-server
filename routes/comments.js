@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get("/:id", async (req, res) => {
   const postId = req.params.id;
-  console.log("here");
 
   try {
     const getPostsComments = await knex
