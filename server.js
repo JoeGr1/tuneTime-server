@@ -140,6 +140,9 @@ app.use("/api/posts", postsRoutes);
 const folllowingRoutes = require("./routes/following");
 app.use("/api/following", folllowingRoutes);
 
+const commentsRoutes = require("./routes/comments");
+app.use("/api/comments", commentsRoutes);
+
 app.listen(PORT, () => {
   console.log(`Express App is listening to PORT: ${PORT}`);
 });
