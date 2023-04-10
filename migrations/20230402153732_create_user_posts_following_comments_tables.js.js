@@ -20,6 +20,7 @@ exports.up = function (knex) {
       table.text("preview_url").notNullable();
       table.text("artist_name").notNullable();
       table.text("album_name").notNullable();
+      table.text("artist_id").notNullable();
       table.text("album_cover").notNullable();
       table.text("song_duration").notNullable();
       table.integer("likes").unsigned().notNullable();

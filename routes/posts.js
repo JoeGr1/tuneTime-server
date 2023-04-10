@@ -81,6 +81,7 @@ router.post("/", async (req, res) => {
     song_id,
     preview_url,
     artist_name,
+    artist_id,
     album_name,
     album_cover,
     song_duration,
@@ -95,11 +96,12 @@ router.post("/", async (req, res) => {
     !song_id ||
     !preview_url ||
     !artist_name ||
+    !artist_id ||
     !album_name ||
     !album_cover ||
     !song_duration ||
     !likes ||
-    Object.keys(req.body).length > 10
+    Object.keys(req.body).length > 11
   ) {
     return res.status(400).json({
       error: "true",
@@ -110,6 +112,7 @@ router.post("/", async (req, res) => {
         "song_name",
         "song_id",
         "preview_url",
+        "artist_name",
         "artist_name",
         "album_name",
         "album_cover",
@@ -127,6 +130,7 @@ router.post("/", async (req, res) => {
       song_id,
       preview_url,
       artist_name,
+      artist_id,
       album_name,
       album_cover,
       song_duration,
