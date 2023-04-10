@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const knex = require("knex")(require("./knexfile"));
 // const session = require("express-session");
 const querystring = require("querystring");
 const app = express();
@@ -129,6 +130,21 @@ app.get("/currently-playing", (req, res) => {
   };
 
   getCurrent();
+});
+
+app.get("/api/get-recommended/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const userPosts = await knex("posts").where("spotify_id", "=", userId);
+
+    console.log(userPosts);
+
+    res.status(200).json(userPosts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(`Could Not Retreive Users Recommnded`);
+  }
 });
 
 const usersRoutes = require("./routes/users");
