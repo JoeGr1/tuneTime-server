@@ -74,13 +74,12 @@ router.get("/:id", async (req, res) => {
 // post Posts
 
 router.post("/", async (req, res) => {
-  console.log(req.body);
-  console.log(typeof req.body.likes);
   const {
     spotify_id,
     user_name,
     song_name,
     song_id,
+    preview_url,
     artist_name,
     album_name,
     album_cover,
@@ -94,12 +93,13 @@ router.post("/", async (req, res) => {
     !user_name ||
     !song_name ||
     !song_id ||
+    !preview_url ||
     !artist_name ||
     !album_name ||
     !album_cover ||
     !song_duration ||
     !likes ||
-    Object.keys(req.body).length > 9
+    Object.keys(req.body).length > 10
   ) {
     return res.status(400).json({
       error: "true",
@@ -109,6 +109,7 @@ router.post("/", async (req, res) => {
         "user_name",
         "song_name",
         "song_id",
+        "preview_url",
         "artist_name",
         "album_name",
         "album_cover",
@@ -124,6 +125,7 @@ router.post("/", async (req, res) => {
       user_name,
       song_name,
       song_id,
+      preview_url,
       artist_name,
       album_name,
       album_cover,

@@ -151,8 +151,6 @@ app.listen(PORT, () => {
 
 // // cryyently getting server error (spotiy error, could be axios request error though)
 
-// // back end
-
 // app.get("/get-widget/:songid", async (req, res) => {
 //   const songId = req.params.songid;
 
@@ -167,6 +165,7 @@ app.listen(PORT, () => {
 //     res.status(500).json("Error Fetching Widget");
 //   }
 // });
+// // back end
 //   // -------------------
 
 // -----------refresh token for longer use

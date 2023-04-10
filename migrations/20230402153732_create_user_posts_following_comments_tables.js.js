@@ -17,6 +17,7 @@ exports.up = function (knex) {
       table.string("user_name").notNullable().index();
       table.text("song_name").notNullable();
       table.text("song_id").notNullable();
+      table.text("preview_url").notNullable();
       table.text("artist_name").notNullable();
       table.text("album_name").notNullable();
       table.text("album_cover").notNullable();
