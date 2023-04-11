@@ -138,9 +138,73 @@ app.get("/api/get-recommended/:id", async (req, res) => {
   try {
     const userPosts = await knex("posts").where("spotify_id", "=", userId);
 
-    console.log(userPosts);
+    const seed_artists = userPosts.map((post, i) => {
+      if (i <= 2) {
+        return post.artist_id;
+      } else {
+        return;
+      }
+    });
 
-    res.status(200).json(userPosts);
+    const seed_tracks = userPosts.map((post, i) => {
+      if (i <= 2) {
+        return post.song_id;
+      } else {
+        return;
+      }
+    });
+
+    let seed_genre;
+
+    const genreHeaders = {
+      Authorization: `Bearer ${session.access_token}`,
+    };
+
+    const getSeedGenre = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.spotify.com/v1/artists/${seed_artists[2]}`,
+          { headers: genreHeaders }
+        );
+        console.log(response.data.genres);
+        seed_genre =
+          (response.data.genres && response.data.genres[0]) || "hip-hop";
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(`Could Not Retreive Users Recommnded`);
+      }
+    };
+    await getSeedGenre();
+
+    const headers = {
+      Authorization: `Bearer ${session.access_token}`,
+      "Content-Type": "application/json",
+    };
+
+    const data = {
+      seed_artists: seed_artists,
+      seed_tracks: seed_tracks,
+      seed_genres: seed_genre,
+      limit: 10,
+    };
+
+    const getRecommended = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.spotify.com/v1/recommendations`,
+          {
+            headers,
+            params: data,
+          }
+        );
+        res.status(200).json(response.data.tracks);
+      } catch (error) {
+        console.log(error);
+        res.status(500).json(`Could Not Retreive Users Recommnded`);
+      }
+    };
+
+    await getRecommended();
   } catch (err) {
     console.log(err);
     res.status(500).json(`Could Not Retreive Users Recommnded`);
